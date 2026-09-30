@@ -5,7 +5,7 @@
       "company": "빅밸류",
       "position": "AI 에이전트 연구원 (전문연구요원)",
       "skills": ["python", "agent-design", "prompt-engineering", "rag-pipeline", "llm-evaluation", "multimodal"],
-      "deadline": "상시채용",
+      "deadline": null,
       "link": "https://www.jobkorea.co.kr/Recruit/GI_Read/49969904?Oem_Code=C1&PageGbn=ST&sc=225",
       "createdAt": "2026-09-29T10:42:00"
     },
@@ -39,7 +39,7 @@
         "llm-finetuning",
         "multimodal"
       ],
-      "deadline": "상시채용",
+      "deadline": null,
       "link": "https://makinarocks.career.greetinghr.com/ko/o/207418",
       "createdAt": "2026-09-29T10:51:00"
     },
@@ -55,7 +55,7 @@
         "docker-k8s",
         "fastapi"
       ],
-      "deadline": "상시채용",
+      "deadline": null,
       "link": "https://zighang.com/recruitment/8602000e-9e14-4c70-abdb-355e7efa68c3",
       "createdAt": "2026-09-29T13:30:00"
     },
