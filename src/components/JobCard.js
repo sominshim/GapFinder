@@ -1,6 +1,6 @@
 import SkillCard from "@/components/SkillCard";
 
-export default function JobCard({ job }) {
+export default function JobCard({ job, handleDelete}) {
     const {company, deadline, link, skills} = job;
 
     return (
@@ -11,7 +11,7 @@ export default function JobCard({ job }) {
                         <h2 className="job-card-title">{company}</h2>
                         <p className="job-card-subtitle">{deadline} · <a href={link} target="_blank" rel="noopener noreferrer">원문 보기</a></p>
                     </div>
-                    <button type="button" className="icon-button" aria-label={`${company} 공고 삭제`}>
+                    <button type="button" className="icon-button" aria-label={`${company} 공고 삭제`} onClick={() => {console.log(job.id); handleDelete(job.id)}}>
                         <svg 
                             viewBox="0 0 24 24" 
                             fill="none" 
