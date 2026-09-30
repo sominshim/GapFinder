@@ -1,14 +1,14 @@
 import SkillCard from "@/components/SkillCard";
 
 export default function JobCard({ job, handleDelete}) {
-    const {company, deadline, link, skills} = job;
+    const {company, position, skills, deadline, link} = job;
 
     return (
         <> 
             <li className="job-card">
                 <div className="job-card-header">
                     <div>
-                        <h2 className="job-card-title">{company}</h2>
+                        <h2 className="job-card-title">{company} · {position}</h2>
                         <p className="job-card-subtitle">{deadline} · <a href={link} target="_blank" rel="noopener noreferrer">원문 보기</a></p>
                     </div>
                     <button type="button" className="icon-button" aria-label={`${company} 공고 삭제`} onClick={() => {console.log(job.id); handleDelete(job.id)}}>
@@ -27,10 +27,6 @@ export default function JobCard({ job, handleDelete}) {
                 </div>
                 <ul className="chips" aria-label="요구 기술">
                     {skills.map((skill) => <SkillCard key={skill} skill={skill}/>)}
-                    <li className="chip chip-gap">! Docker<span className="sr-only">(부족)</span></li>
-                    <li className="chip chip-gap">! AWS<span className="sr-only">(부족)</span></li>
-                    <li className="chip chip-owned">✓ Python<span className="sr-only">(보유)</span></li>
-                    <li className="chip chip-owned">✓ FastAPI<span className="sr-only">(보유)</span></li>
                 </ul>
                 <div className="fit">
                 <span className="fit-label">기술 적합도</span>

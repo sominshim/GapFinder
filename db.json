@@ -1,51 +1,45 @@
 {
-  "skills": [
-    { "id": "python", "name": "Python" },
-    { "id": "rag-pipeline", "name": "RAG 파이프라인 (파싱·청킹·임베딩·Vector DB·Reranking)" },
-    { "id": "llm-finetuning", "name": "LLM 파인튜닝·자체 서빙" },
-    { "id": "agent-design", "name": "Agent 구조 설계 (Multi-Agent 포함)" },
-    { "id": "prompt-engineering", "name": "프롬프트·Context 엔지니어링" },
-    { "id": "llm-frameworks", "name": "LLM 프레임워크·API (LangChain/LangGraph, OpenAI/Claude API)" },
-    { "id": "pytorch", "name": "PyTorch" },
-    { "id": "git", "name": "Git 협업 (코드 리뷰 포함)" },
-    { "id": "aws-deploy", "name": "AWS·클라우드 배포 (GCP 포함)" },
-    { "id": "docker-k8s", "name": "Docker/Kubernetes" },
-    { "id": "fastapi", "name": "FastAPI (서빙·비동기 처리)" },
-    { "id": "llm-evaluation", "name": "LLM 평가·회귀 테스트·실패 원인 분석" },
-    { "id": "backend-db", "name": "백엔드 API 개발·DB (SQL/스키마 설계)" },
-    { "id": "paper-experience", "name": "논문 조사·구현·게재 경험" },
-    { "id": "ml-basics", "name": "머신러닝 이해 (기본 개념·모델 학습)" },
-    { "id": "data-pipeline", "name": "데이터 파이프라인 설계·구축·운영 (ETL 포함)" },
-    { "id": "huggingface", "name": "Hugging Face" },
-    { "id": "ai-model-design", "name": "AI 모델 설계·개선 (손실 함수, 아키텍처)" },
-    { "id": "inference-opt", "name": "추론 엔진·모델 경량화 (vLLM, TensorRT, 양자화)" },
-    { "id": "multimodal", "name": "멀티모달 데이터 처리 (이미지, 음성, 문서)" }
-  ],
   "jobs": [
-    {
+      {
       "id": "1",
       "company": "빅밸류",
       "position": "AI 에이전트 연구원 (전문연구요원)",
       "skills": ["python", "agent-design", "prompt-engineering", "rag-pipeline", "llm-evaluation", "multimodal"],
-      "deadline": null,
-      "link": "https://www.bigvalue.ai",
+      "deadline": "상시채용",
+      "link": "https://www.jobkorea.co.kr/Recruit/GI_Read/49969904?Oem_Code=C1&PageGbn=ST&sc=225",
       "createdAt": "2026-09-29T10:42:00"
     },
     {
       "id": "2",
       "company": "노리스페이스",
       "position": "LLM Research Engineer",
-      "skills": ["python", "pytorch", "rag-pipeline", "prompt-engineering", "llm-frameworks", "fastapi", "git", "llm-finetuning", "paper-experience"],
+      "skills": [
+        "python",
+        "pytorch",
+        "rag-pipeline",
+        "prompt-engineering",
+        "llm-frameworks",
+        "fastapi",
+        "git",
+        "llm-finetuning",
+        "paper-experience"
+      ],
       "deadline": "2026-02-01",
-      "link": "https://www.jobkorea.co.kr/company/48672790/recruit",
+      "link": "https://www.jobkorea.co.kr/Recruit/GI_Read/49761153?Oem_Code=C1&PageGbn=ST&sc=225",
       "createdAt": "2026-09-29T10:50:00"
     },
     {
       "id": "3",
       "company": "마키나락스",
       "position": "FDE - LLM (창원)",
-      "skills": ["python", "agent-design", "rag-pipeline", "llm-finetuning", "multimodal"],
-      "deadline": null,
+      "skills": [
+        "python",
+        "agent-design",
+        "rag-pipeline",
+        "llm-finetuning",
+        "multimodal"
+      ],
+      "deadline": "상시채용",
       "link": "https://makinarocks.career.greetinghr.com/ko/o/207418",
       "createdAt": "2026-09-29T10:51:00"
     },
@@ -53,8 +47,15 @@
       "id": "4",
       "company": "스텝하우",
       "position": "AI 데이터 엔지니어 (RAG/LLM 서비스 개발)",
-      "skills": ["python", "data-pipeline", "backend-db", "aws-deploy", "docker-k8s", "fastapi"],
-      "deadline": null,
+      "skills": [
+        "python",
+        "data-pipeline",
+        "backend-db",
+        "aws-deploy",
+        "docker-k8s",
+        "fastapi"
+      ],
+      "deadline": "상시채용",
       "link": "https://zighang.com/recruitment/8602000e-9e14-4c70-abdb-355e7efa68c3",
       "createdAt": "2026-09-29T13:30:00"
     },
@@ -62,10 +63,15 @@
       "id": "5",
       "company": "한화오션",
       "position": "[AX] AI 개발 (2026 하반기 신입)",
-      "skills": ["python", "ml-basics", "data-pipeline"],
+      "skills": [
+        "python",
+        "ml-basics",
+        "data-pipeline"
+      ],
       "deadline": "2026-09-30",
       "link": "https://www.jobkorea.co.kr/Recruit/GI_Read/49987931",
       "createdAt": "2026-09-29T11:03:00"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
