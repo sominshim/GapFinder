@@ -1,10 +1,17 @@
 {
   "jobs": [
-      {
+    {
       "id": "1",
       "company": "빅밸류",
       "position": "AI 에이전트 연구원 (전문연구요원)",
-      "skills": ["python", "agent-design", "prompt-engineering", "rag-pipeline", "llm-evaluation", "multimodal"],
+      "skills": [
+        "python",
+        "agent-design",
+        "prompt-engineering",
+        "rag-pipeline",
+        "llm-evaluation",
+        "multimodal"
+      ],
       "deadline": null,
       "link": "https://www.jobkorea.co.kr/Recruit/GI_Read/49969904?Oem_Code=C1&PageGbn=ST&sc=225",
       "createdAt": "2026-09-29T10:42:00"

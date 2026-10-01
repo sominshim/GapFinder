@@ -4,7 +4,7 @@ import { jobApi } from "@/api/jobApi";
 import { CATEGORIES, SKILLS } from "@/constants/skills";
 import { useState } from "react";
 
-export default function Form({ isOpen }) {
+export default function Form({ isOpen, handleCreated }) {
     const [form, setForm] = useState({
         company: "",
         position: "",
@@ -14,6 +14,8 @@ export default function Form({ isOpen }) {
     });
 
     const { company, position, deadline, link, skills } = form;
+    const [error, setError] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
     const handleChange = (e) => {
         setForm({
@@ -44,26 +46,8 @@ export default function Form({ isOpen }) {
         });
     };
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [jobData, setJobData] = useState([]);
-
-    const loadJobs = async () => {
-        try {
-            setLoading(true);
-            setError(null);
-
-            const data = await jobApi.getJobs();
-            setJobData(data);
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     const handleRegister = async (e) => {
-        // e.preventDefault(); // 새로고침 막기
+        e.preventDefault(); // 새로고침 막기
 
         if (skills.length === 0) {
             setError("요구 기술을 1개 이상 골라주세요.");
@@ -71,14 +55,18 @@ export default function Form({ isOpen }) {
         }
 
         try {
+            setSubmitting(true);
             setError(null);
 
+            await new Promise((resolve) => setTimeout(resolve, 2000)); // 확인용 2초 지연, 나중에 삭제
             await jobApi.createJob({ ...form, deadline: deadline || null });
-            await loadJobs();
+            await handleCreated();
             handleReset();
         } catch (error) {
             setError(error.message);
             console.error(error);
+        } finally {
+            setSubmitting(false); // 성공이든 실패든 반드시 해제
         }
     };
 
@@ -206,9 +194,13 @@ export default function Form({ isOpen }) {
                         >
                             취소
                         </button>
-                        {/* <!-- 요청 중에는 disabled + "등록 중..." --> */}
-                        <button type="submit" className="btn btn-primary">
-                            등록
+
+                        <button
+                            type="submit"
+                            className="btn btn-primary"
+                            disabled={submitting}
+                        >
+                            {submitting ? "등록 중..." : "등록"}
                         </button>
                     </div>
                 </form>
