@@ -1,6 +1,7 @@
 "use client";
 import { jobApi } from "@/api/jobApi";
 import JobCard from "@/components/JobCard";
+import { useSkillStore } from "@/stores/useSkillStore";
 
 import { useEffect, useState } from "react";
 
@@ -9,6 +10,7 @@ export default function Home() {
     const [error, setError] = useState(null);
     const [jobData, setJobData] = useState([]);
 
+    const { mySkills } = useSkillStore();
     // 조회 API
     const loadJobs = async () => {
         try {
@@ -125,6 +127,7 @@ export default function Home() {
                     <JobCard
                         key={job.id}
                         job={job}
+                        mySkills={mySkills}
                         handleDelete={handleDelete}
                     />
                 ))}

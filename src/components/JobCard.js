@@ -1,8 +1,14 @@
 import SkillCard from "@/components/SkillCard";
+import { SKILLS } from "@/constants/skills";
+import { getFitScore } from "@/utils/analysis";
 
-export default function JobCard({ job, handleDelete }) {
+export default function JobCard({ job, mySkills, handleDelete }) {
     const { company, position, skills, deadline, link } = job;
-
+    const { ownedCount, totalCount, percent } = getFitScore(
+        job.skills,
+        mySkills,
+    );
+    // console.log(ownedCount, totalCount, percent);
     return (
         <>
             <li className="job-card">
@@ -45,7 +51,14 @@ export default function JobCard({ job, handleDelete }) {
                 </div>
                 <ul className="chips" aria-label="요구 기술">
                     {skills.map((skill) => (
-                        <SkillCard key={skill} skill={skill} />
+                        <SkillCard
+                            key={skill}
+                            skill={
+                                SKILLS.find((s) => s.id === skill)?.name ??
+                                skill
+                            }
+                            owned={mySkills.includes(skill)}
+                        />
                     ))}
                 </ul>
                 <div className="fit">
@@ -57,11 +70,14 @@ export default function JobCard({ job, handleDelete }) {
                     >
                         <div
                             className="fit-fill"
-                            style={{ width: "50%" }}
+                            style={{
+                                width: `${(ownedCount / totalCount) * 100}%`,
+                            }}
                         ></div>
                     </div>
                     <span className="fit-value">
-                        <strong>50%</strong>4개 중 2개
+                        <strong>{percent}%</strong>
+                        {totalCount}개 중 {ownedCount}개
                     </span>
                 </div>
             </li>

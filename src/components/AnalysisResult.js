@@ -13,6 +13,8 @@ export default function AnalysisResult({ jobs, mySkills }) {
 
     const [assumedSkill, setAssumedSkill] = useState(false); // 배웠다고 가정한 기술
 
+    console.log(topSkills);
+
     // assumedSkill 배웠을 때, 평균 기술 적합도 계산
     const assumedFit = assumedSkill
         ? getAverageFit(jobs, [...mySkills, assumedSkill])
@@ -68,7 +70,7 @@ export default function AnalysisResult({ jobs, mySkills }) {
                                     {index + 1}
                                 </span>
                                 <span className="priority-name">
-                                    {skill.id}
+                                    {skill.name}
                                 </span>
                                 <div className="bar">
                                     <div
