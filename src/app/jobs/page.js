@@ -51,7 +51,7 @@ export default function Home() {
         loadJobs();
     }, []);
 
-    const handleCreated = () => {
+    const handleCreated = async () => {
         setIsOpen(false);
         await loadJobs();
     };
