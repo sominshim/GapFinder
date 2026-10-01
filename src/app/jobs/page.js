@@ -99,7 +99,7 @@ export default function Home() {
                     <button
                         type="button"
                         className="btn btn-primary"
-                        onClick={() => loadJobs()}
+                        onClick={loadJobs}
                     >
                         다시 시도
                     </button>
@@ -130,6 +130,18 @@ export default function Home() {
                     {/* <button type="button" className="btn btn-primary">+ 공고 등록</button> */}
                 </div>
             );
+        return (
+            <ul className="job-grid">
+                {jobData.map((job) => (
+                    <JobCard
+                        key={job.id}
+                        job={job}
+                        mySkills={mySkills}
+                        handleDelete={handleDelete}
+                    />
+                ))}
+            </ul>
+        );
     };
 
     return (
@@ -137,7 +149,7 @@ export default function Home() {
             <main className="wrapper">
                 <div className="page-head">
                     <div>
-                        <h1 className="page-title">채용 공고</h1>
+                        <h1 className="page-title">공고 모으기</h1>
                         <p className="page-desc">
                             부족한 기술이 먼저 보여요. 보유 기술은{" "}
                             <Link href="/analysis">갭 분석</Link>에서 바꿀 수
@@ -155,19 +167,13 @@ export default function Home() {
                     </button>
                 </div>
 
-                <JobForm isOpen={isOpen} handleCreated={handleCreated} />
+                <JobForm
+                    isOpen={isOpen}
+                    handleCreated={handleCreated}
+                    handleCancel={() => setIsOpen(false)}
+                />
 
                 {renderList()}
-                <ul className="job-grid">
-                    {jobData.map((job) => (
-                        <JobCard
-                            key={job.id}
-                            job={job}
-                            mySkills={mySkills}
-                            handleDelete={handleDelete}
-                        />
-                    ))}
-                </ul>
             </main>
         </>
     );

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function Home() {
-    return <main>준비 중</main>;
+    redirect("/jobs");
 }

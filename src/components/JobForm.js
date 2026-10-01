@@ -4,7 +4,7 @@ import { jobApi } from "@/api/jobApi";
 import { CATEGORIES, SKILLS } from "@/constants/skills";
 import { useState } from "react";
 
-export default function Form({ isOpen, handleCreated }) {
+export default function Form({ isOpen, handleCreated, handleCancel }) {
     const [form, setForm] = useState({
         company: "",
         position: "",
@@ -14,7 +14,7 @@ export default function Form({ isOpen, handleCreated }) {
     });
 
     const { company, position, deadline, link, skills } = form;
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     const [submitting, setSubmitting] = useState(false);
 
     const handleChange = (e) => {
@@ -58,7 +58,7 @@ export default function Form({ isOpen, handleCreated }) {
             setSubmitting(true);
             setError(null);
 
-            await new Promise((resolve) => setTimeout(resolve, 2000)); // 확인용 2초 지연, 나중에 삭제
+            // await new Promise((resolve) => setTimeout(resolve, 1000)); // 확인용 2초 지연, 나중에 삭제
             await jobApi.createJob({ ...form, deadline: deadline || null });
             await handleCreated();
             handleReset();
@@ -118,9 +118,7 @@ export default function Form({ isOpen, handleCreated }) {
                                 value={deadline}
                                 onChange={handleChange}
                             />
-                            <label className="inline-check">
-                                <input type="checkbox" /> 상시채용
-                            </label>
+                            <p className="section-desc">비워두면 상시채용</p>
                         </div>
                         <div className="field">
                             <label htmlFor="link">공고 링크</label>
@@ -141,7 +139,8 @@ export default function Form({ isOpen, handleCreated }) {
                         <legend>
                             요구 기술 *
                             <span>
-                                공고에 적힌 기술을 모두 골라주세요 · 4개 선택
+                                공고에 적힌 기술을 모두 골라주세요 ·{" "}
+                                {skills.length}개 선택
                             </span>
                         </legend>
 
@@ -190,7 +189,10 @@ export default function Form({ isOpen, handleCreated }) {
                         <button
                             type="button"
                             className="btn btn-secondary"
-                            onClick={handleReset}
+                            onClick={() => {
+                                handleReset();
+                                handleCancel();
+                            }}
                         >
                             취소
                         </button>

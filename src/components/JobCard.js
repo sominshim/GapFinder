@@ -8,6 +8,11 @@ export default function JobCard({ job, mySkills, handleDelete }) {
         job.skills,
         mySkills,
     );
+
+    // 미보유(false) 먼저, 보유(true) 나중
+    const sortedSkills = [...skills].sort(
+        (a, b) => mySkills.includes(a) - mySkills.includes(b),
+    );
     // console.log(ownedCount, totalCount, percent);
     return (
         <>
@@ -18,14 +23,20 @@ export default function JobCard({ job, mySkills, handleDelete }) {
                             {company} · {position}
                         </h2>
                         <p className="job-card-subtitle">
-                            {deadline ? deadline + " · " : "상시채용 · "}
-                            <a
-                                href={link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                원문 보기
-                            </a>
+                            {deadline ? deadline : "상시채용"}
+
+                            {link && (
+                                <>
+                                    {" · "}
+                                    <a
+                                        href={link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        원문 보기
+                                    </a>
+                                </>
+                            )}
                         </p>
                     </div>
                     <button
@@ -50,7 +61,7 @@ export default function JobCard({ job, mySkills, handleDelete }) {
                     </button>
                 </div>
                 <ul className="chips" aria-label="요구 기술">
-                    {skills.map((skill) => (
+                    {sortedSkills.map((skill) => (
                         <SkillCard
                             key={skill}
                             skill={
@@ -66,17 +77,17 @@ export default function JobCard({ job, mySkills, handleDelete }) {
                     <div
                         className="fit-bar"
                         role="img"
-                        aria-label="기술 적합도 50%"
+                        aria-label={`기술 적합도 ${percent ?? 0}%`}
                     >
                         <div
                             className="fit-fill"
                             style={{
-                                width: `${(ownedCount / totalCount) * 100}%`,
+                                width: `${percent ?? 0}%`,
                             }}
                         ></div>
                     </div>
                     <span className="fit-value">
-                        <strong>{percent}%</strong>
+                        <strong>{percent ?? 0}%</strong>
                         {totalCount}개 중 {ownedCount}개
                     </span>
                 </div>

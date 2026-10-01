@@ -1,4 +1,5 @@
 import { getAverageFit, getMissingSkills } from "@/utils/analysis";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function AnalysisResult({ jobs, mySkills }) {
@@ -11,9 +12,7 @@ export default function AnalysisResult({ jobs, mySkills }) {
     const topSkills = missingSkills.slice(0, 3); // 먼저 공부할 top5 기술
     const maxCount = missingSkills[0]?.count ?? 0;
 
-    const [assumedSkill, setAssumedSkill] = useState(false); // 배웠다고 가정한 기술
-
-    console.log(topSkills);
+    const [assumedSkill, setAssumedSkill] = useState(null); // 배웠다고 가정한 기술
 
     // assumedSkill 배웠을 때, 평균 기술 적합도 계산
     const assumedFit = assumedSkill
@@ -28,6 +27,61 @@ export default function AnalysisResult({ jobs, mySkills }) {
     const handleAssumeToggle = (id) => {
         setAssumedSkill(assumedSkill === id ? null : id);
     };
+
+    // 예외 관리
+    // 보유 기술 입력 안내
+    if (mySkills.length === 0) {
+        return (
+            <div>
+                <div className="state">
+                    <svg
+                        className="state-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M5 12l4 4 10-10" />
+                    </svg>
+                    <p className="state-title">가진 기술을 먼저 골라주세요</p>
+                    <p className="state-desc">
+                        왼쪽에서 할 줄 아는 기술을 누르면 부족한 기술을
+                        찾아드려요.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    // 공고 등록 안내
+    if (jobCount === 0) {
+        return (
+            <div>
+                <div className="state">
+                    <svg
+                        className="state-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M4 20V11M10 20V5M16 20v-6M3 20h18" />
+                    </svg>
+                    <p className="state-title">분석할 공고가 없어요</p>
+                    <p className="state-desc">
+                        공고를 1개 이상 등록하면 분석이 시작돼요.
+                    </p>
+                    <Link href={"/jobs"} className="btn btn-secondary">
+                        공고 모으러 가기
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <>
@@ -97,11 +151,11 @@ export default function AnalysisResult({ jobs, mySkills }) {
                         ))}
                     </ol>
 
-                    {/* <!-- 선택 1: 가정한 기술이 있을 때만 sim-box, 없으면 sim-hint --> */}
+                    {/* <!-- 가정한 기술이 있을 때만 sim-box, 없으면 sim-hint --> */}
                     {assumedSkill ? (
                         <div className="sim-box" role="status">
                             <p className="sim-box-title">
-                                <strong>{assumedName}</strong>를 배우면
+                                <strong>{assumedName}</strong> 학습 시
                             </p>
                             <div className="sim-metric">
                                 <span className="sim-metric-label">
@@ -114,12 +168,6 @@ export default function AnalysisResult({ jobs, mySkills }) {
                                     </span>
                                 </span>
                             </div>
-                            {/* <div className="sim-metric">
-                            <span className="sim-metric-label">
-                                적합도 70% 이상 공고
-                            </span>
-                            <span className="sim-metric-value">1개 → 3개</span>
-                        </div> */}
                         </div>
                     ) : (
                         <div className="sim-hint">
